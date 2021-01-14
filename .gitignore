@@ -1,0 +1,7 @@
+_legacy_inequality/
+.vscode/
+env/
+*.pyc
+api/__pycache__/
+frontend/__pycache__/
+inequality_dashboard/__pycache__/
