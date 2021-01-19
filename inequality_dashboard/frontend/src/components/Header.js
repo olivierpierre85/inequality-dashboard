@@ -18,7 +18,7 @@ const Header = (props) => {
           backgroundImage: "url(" + image + ")",
         }}
          >
-            <h1>HEader</h1>
+            <h1>HEader é</h1>
         </div>
         );
 }
