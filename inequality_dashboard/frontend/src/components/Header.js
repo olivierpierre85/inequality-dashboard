@@ -8,58 +8,44 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      //height: "40vh",
-      [theme.breakpoints.down('sm')]: {
-        height: "180px",
-      },
-      [theme.breakpoints.up('md')]: {
-        height: "260px",
-      },
-      [theme.breakpoints.up('lg')]: {
-        height: "300px",
-      },
       backgroundSize: "cover",
+      backgroundPosition: "50%",
+      [theme.breakpoints.up('md')]: {
+        minHeight: 500,
+      },
     },
-    headerTitle: {
+    barTitle: {
       textAlign: "center",
       width: "100%",
       textTransform: "uppercase",
-      [theme.breakpoints.down('sm')]: {
-        fontSize: "18px"
-      },
+    },
+    headerText: {
+      textAlign: "left",
+      backgroundColor:"#0000007a",
       [theme.breakpoints.up('md')]: {
-        fontSize: "20px"
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: "24px"
+        minHeight: 500,
       },
     },
     title: {
       color: "#FFFFFF",
-      [theme.breakpoints.down('sm')]: {
-        fontSize: "40px"
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: "60px"
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: "70px"
-      },
+      paddingTop : "1rem",
+      paddingBottom : "1rem",
+      paddingLeft : "1rem",
+      paddingRight : "1rem",
+      fontWeight: 400,
     },
     subtitle: {
       color: "#FFFFFF",
-      [theme.breakpoints.down('sm')]: {
-        fontSize: "20px"
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: "25px"
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: "30px"
-      },
+      paddingTop : "1rem",
+      paddingBottom : "6rem",
+      paddingLeft : "1rem",
+      paddingRight : "1rem",
+      textTransform: "capitalize",
     },
     menuButton: {
     }
@@ -101,18 +87,20 @@ const Header = (props) => {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
-              <Typography variant="h6" className={classes.headerTitle}>
+              <Typography variant="button" className={classes.barTitle}>
                 Inequality Dashboard
               </Typography>
             </Toolbar>
           </AppBar>
           <Toolbar />
-          <Typography  variant="h1" className={classes.title}>
-            Inequality Dashboard
-          </Typography>
-          <Typography variant="h4" className={classes.subtitle}>
-            A graphical representation of Inequality in the world, using the latest numbers of the World Inequality Database
-          </Typography>
+          <Paper square elevation={0} className={classes.headerText}>
+            <Typography  variant="h1" className={classes.title}>
+              Inequality in Numbers
+            </Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              A graphical representation of Inequality in the world, using the latest numbers of the World Inequality Database
+            </Typography>
+          </Paper>
       </div>
       );
 }
