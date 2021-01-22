@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { Divider } from '@material-ui/core';
+import CountrySelect from './CountrySelect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,16 +37,22 @@ export default function Content() {
       <Grid container spacing={3} >
         <Grid item xs={12}>
           <Typography  variant="h2" className={classes.title}>
-            Introduction
+            Comparison            
+          </Typography>
+          
+          <Typography variant="body">
+            First pick up two countries you want to compare 
           </Typography>
         </Grid>
-        <Grid item xs={6}>
-        <p>TEST TESTr</p>
+        <Grid item xs={12} sm={6} >
+          <CountrySelect />
         </Grid>
-        <Grid item xs={6}>
-        <p>TEST TESTd</p>
+        <Grid item xs={12} sm={6}>
+          <CountrySelect />
         </Grid>
+
         <Grid item xs={12}>
+        <Divider variant="middle" />
         <p>TEST TEST</p>
           <p>TEST TEST</p>
           <p>TEST TEST</p>
