@@ -27,9 +27,19 @@ const useStyles = makeStyles({
 export default function CountrySelect() {
   const classes = useStyles();
 
+  const [country, setCountry]= React.useState('');
+  const [year, setYear] = React.useState('');
+
   return (
     <div>
+      <div>{`value: ${country !== null ? `'${ country.code }'` : 'null'}`}</div>
+      <div>{`year: ${year !== null ? `'${ year }'` : 'null'}`}</div>
+
       <Autocomplete
+        onChange={(event, newValue) => {
+          setCountry(newValue);
+          setYear(null);
+        }}
 
         options={countries}
         classes={{
@@ -59,8 +69,13 @@ export default function CountrySelect() {
       />
 
       <Autocomplete
-        options={years}
-        getOptionLabel={(option) => option.label}
+        options={country.years || []}
+        onChange={(event, newValue) => {
+          setYear(newValue);
+        }}
+        inputValue={year || ''}
+        noOptionsText='Select a Country first'
+        getOptionLabel={(option) => option}
         style={{ margin: 10 }}
         renderInput={(params) => <TextField {...params} style={{  maxWidth: 400 }} label="Year" variant="outlined" />}
       />
@@ -68,14 +83,12 @@ export default function CountrySelect() {
     </div>
   );
 }
-const years = [ 
-  { label: '2020' },
-  { label: '2010' },
- ];
- 
+
 const countries = [
-  { code: 'AD', label: 'Andorra', phone: '376' },
-  { code: 'AE', label: 'United Arab Emirates', phone: '971' },
+  { code: 'AD', label: 'Andorra', years: ['2010','2020'] },
+  { code: 'AE', label: 'United Arab Emirates', years: ['2010','2011'] }
+];
+/*
   { code: 'AF', label: 'Afghanistan', phone: '93' },
   { code: 'AG', label: 'Antigua and Barbuda', phone: '1-268' },
   { code: 'AI', label: 'Anguilla', phone: '1-264' },
@@ -322,4 +335,4 @@ const countries = [
   { code: 'ZA', label: 'South Africa', phone: '27' },
   { code: 'ZM', label: 'Zambia', phone: '260' },
   { code: 'ZW', label: 'Zimbabwe', phone: '263' },
-];
+];*/

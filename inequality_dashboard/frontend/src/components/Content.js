@@ -41,7 +41,7 @@ export default function Content() {
           </Typography>
           
           <Typography variant="body">
-            First pick up two countries you want to compare 
+            First pick up two countries and year you want to compare 
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6} >

@@ -8,10 +8,11 @@ import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui
 let theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#2e7d32',
+      main: '#d84315',
+      
     },
     secondary: {
-      main: '#d84315',
+      main: '#2e7d32',
     },
   },
   typography: {
