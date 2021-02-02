@@ -3,5 +3,6 @@ _legacy_inequality/
 env/
 *.pyc
 api/__pycache__/
-frontend/__pycache__/
+inequality_dashboard/frontend/__pycache__/
 inequality_dashboard/__pycache__/
+inequality_dashboard/frontend/node_modules/
