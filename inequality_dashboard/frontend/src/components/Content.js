@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Content() {
   const classes = useStyles();
 
+  const [countryLeft, setCountryLeft]= React.useState('');
+  
+  function changeCountry(country,year,id) {
+    alert(country.code + "-" + year + "-" + id);
+  }
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3} >
@@ -45,11 +51,10 @@ export default function Content() {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6} >
-          <CountrySelect />
-
+          <CountrySelect id="left" changeCountry={changeCountry} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <CountrySelect />
+        <CountrySelect id="right" changeCountry={changeCountry} />
         </Grid>
 
         <Grid item xs={12}>
