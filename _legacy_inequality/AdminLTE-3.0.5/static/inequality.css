@@ -1,0 +1,41 @@
+.people-container {
+    display: flex;
+    padding:10px;
+    flex-flow: row wrap;
+  }
+  
+  .people-container-left {
+    display: flex;
+    padding:10px;
+    flex-flow: row-reverse wrap;
+  }
+  .country-left {
+    display: flex;
+    flex-flow: row-reverse wrap;
+  }
+
+  .country-right {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .myprogress {
+    position:relative; /* add! */
+    width: 100px;
+    /* background-color: black !important;*/
+    height: auto !important; /* add! (let text dictate height! ) */
+  }
+  
+  .myprogress-bar { /* Added styles */
+    position: absolute;
+    height: 100%;
+  }
+  
+  .myprogress-label { /* added element and CSS */
+    position: relative;
+    color: #fff;
+  }
+
+  .info-box .salary-box{
+    display:inline;
+  }

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="robots" content="noindex">
+  
+  <title>Inequality Representation | Dashboard</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- MY CSS-->
+  <link rel="stylesheet" href="static/inequality.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="mailto:olivierpierre85@gmail.com" class="nav-link">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="" class="brand-link">
+      <i class="nav-icon fas fa-tachometer-alt"></i>
+      <span class="brand-text font-weight-light">Inequality Representation
+      </span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="">
+              <p>
+                Currently in construction
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center">
+            <h2 class="m-0 text-dark">How does Income Inequality looks like for 100 People ? </h2>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Choose Two Countries/Years</h5>
+              </div>
+                <div class="card-body">
+                  <form role="form">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- select -->
+                        <div class="form-group">
+                          <select id="country-list" class="form-control country-list">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <select id="country-list-right" class="form-control country-list">
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PEOPLE -->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Average Monthly Income (before taxes) - Representation for 100 People</h5>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      <a href="#" class="dropdown-item">Action</a>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="people_chart py-3">    
+                  <p class="text-center">
+                    <strong>If you pick 100 random people, the average MONTHLY salary would be :</strong>
+                  </p>        
+                  <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                      <div class="row">
+                        <div class="col">
+                          <div id="top1_title"></div>
+                          <div class="people-container-left" id="top1"></div>
+                        </div>
+                        <div class="col">
+                          <div id="top1_title_right"></div>
+                          <div class="people-container" id="top1_right"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div id="top9_title"></div>
+                          <div class="people-container-left" id="top9"></div>
+                        </div>
+                        <div class="col">
+                          <div id="top9_title_right"></div>
+                          <div class="people-container container" id="top9_right"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div id="top40_title"></div>
+                          <div class="people-container-left" id="top40"></div>
+                        </div>				
+                        <div class="col">
+                          <div id="top40_title_right"></div>
+                          <div class="people-container" id="top40_right"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div id="bottom50_title"></div>
+                          <div class="people-container-left" id="bottom50"></div>
+                        </div>
+                        <div class="col">
+                          <div id="bottom50_title_right"></div>
+                          <div class="people-container" id="bottom50_right"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+                <!-- /.chart-responsive -->
+              </div>
+            </div>
+            <!-- Progress bar-->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Repartition of National Income - grouped by class (Top 1% Richest, Top 9%, Middle 40%, Bottom 50%)</h5>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      <a href="#" class="dropdown-item">Action</a>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="people_chart py-3">            
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div id="progress_country_title" class="text-center"></div>
+                      <div id="progress_country"></div>
+                      <hr>
+                      <div id="progress_country_right_title" class="text-center"></div>
+                      <div id="progress_country_right"></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.chart-responsive -->
+              </div>
+            </div>
+            <!-- /.card -->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Income Repartition - grouped by class (Top 1% Richest, Top 9%, Middle 40%, Bottom 50%)</h5>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      <a href="#" class="dropdown-item">Action</a>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="cash_chart py-3">  
+                  <div id="income-repartition-progress"> 
+                    <p class="text-center">
+                      <strong>EACH MONTH:</strong>
+                    </p>    
+                  </div>     
+                  <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                      <div class="row">
+                        <div class="col">
+                          <div id="top1_title_cash"></div>
+                          <div class="people-container-left" id="top1_cash"></div>
+                        </div>
+                        <div class="col">
+                          <div id="top1_title_right_cash"></div>
+                          <div class="people-container" id="top1_right_cash"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div id="top9_title_cash"></div>
+                          <div class="people-container-left" id="top9_cash"></div>
+                        </div>
+                        <div class="col">
+                          <div id="top9_title_right_cash"></div>
+                          <div class="people-container container" id="top9_right_cash"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div id="top40_title_cash"></div>
+                          <div class="people-container-left" id="top40_cash"></div>
+                        </div>				
+                        <div class="col">
+                          <div id="top40_title_right_cash"></div>
+                          <div class="people-container" id="top40_right_cash"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div id="bottom50_title_cash"></div>
+                          <div class="people-container-left" id="bottom50_cash"></div>
+                        </div>
+                        <div class="col">
+                          <div id="bottom50_title_right_cash"></div>
+                          <div class="people-container" id="bottom50_right_cash"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2"></div>
+                  </div>
+                </div>
+                <!-- /.chart-responsive -->
+              </div>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+        <!-- /.row -->
+
+        
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>2020 <a href="mailto:olivierpierre85@gmail.com">Olivier PIERRE</a>.</strong>
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 0.0.1
+    </div>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<!-- PAGE SCRIPTS -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<!-- MY SCRIPTS-->
+<script src="static/inequality.js"></script>
+</body>
+</html>
