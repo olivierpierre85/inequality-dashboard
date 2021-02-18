@@ -95,7 +95,7 @@ const Header = (props) => {
           <Toolbar />
           <Paper square elevation={0} className={classes.headerText}>
             <Typography  variant="h1" className={classes.title}>
-              Inequality in Numbers
+              We show you Inequality with Numbers
             </Typography>
             <Typography variant="subtitle1" className={classes.subtitle}>
               A graphical representation of Inequality in the world, using the latest numbers of the World Inequality Database

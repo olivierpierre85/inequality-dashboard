@@ -37,6 +37,7 @@ export default function Content() {
   function changeCountry(country,year,id) {
     alert(country.code + "-" + year + "-" + id);
     //API call to get values for the country/year
+    
   }
 
   return (
