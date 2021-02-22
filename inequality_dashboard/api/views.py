@@ -19,10 +19,21 @@ class IndicatorView(generics.ListAPIView):
     serializer_class = IndicatorSerializer
 
 def countries_years_list(request,indicator_id):
-    #queryset = Indicator.objects.all()
-    yourdata= [{"country": "Belgium", "years": [2010,2030]}, {"country":"France", "years": [2,1]}]
-    results = CountriesYearsSerializer(yourdata, many=True).data
-    return HttpResponse(json.dumps(results))
+    #TODO filter on inidcaotrid
+    indicators = Indicator.objects.all().order_by('country')
+    last_country = indicators[0].country.name
+    country_list = []
+    years = []
+    for i in  indicators:
+        if last_country != i.country.name:
+            country_list.append({"country":last_country,"years":years})
+            years=[]
+        years.append(i.year)
+        last_country = i.country.name
+    country_list.append({"country":last_country,"years":years})
+
+    #results = CountriesYearsSerializer(country_list, many=True).data
+    return HttpResponse(json.dumps(country_list))
 
 def test_view(request):
     # get all countries indictor for type ...
