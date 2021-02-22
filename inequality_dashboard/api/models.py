@@ -14,7 +14,6 @@ class IndicatorType(models.Model):
     def __str__(self):
         return self.name
 
-
 class Indicator(models.Model):
     year = models.CharField(max_length=4, default="")
     indicator_type = models.ForeignKey(IndicatorType, on_delete=models.CASCADE)
