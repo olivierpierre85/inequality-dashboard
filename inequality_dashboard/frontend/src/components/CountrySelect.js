@@ -27,66 +27,90 @@ const useStyles = makeStyles({
 export default function CountrySelect(props) {
   const classes = useStyles();
 
-  const [country, setCountry]= React.useState('');
+  const [country, setCountry] = React.useState('');
   const [year, setYear] = React.useState('');
 
-  return (
-    <div>
-      <div>{`value: ${country !== null ? `'${ country.code }'` : 'null'}`}</div>
-      <div>{`year: ${year !== null ? `'${ year }'` : 'null'}`}</div>
+  const [error, setError] = React.useState(null);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [items, setItems] = React.useState([]);
 
-      <Autocomplete
-        onChange={(event, newValue) => {
-          setCountry(newValue);
-          setYear(null);
-        }}
+  React.useEffect(() => {
+    fetch("/api/countries-years/1/")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setItems(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+  }, [])
 
-        options={countries}
-        classes={{
-          option: classes.option,
-        }}
-        style={{ margin: 10 }}
-        autoHighlight
-        getOptionLabel={(option) => option.label}
-        renderOption={(option) => (
-          <React.Fragment>
-            <span>{countryToFlag(option.code)}</span>
-            {option.label} ({option.code})
-          </React.Fragment>
-        )}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Choose a country"
-            variant="outlined"
-            style={{  maxWidth: 400 }}
-            inputProps={{
-              ...params.inputProps,
-              autoComplete: 'new-password', // disable autocomplete and autofill
-            }}
-          />
-        )}
-      />
-
-      <Autocomplete
-        options={country.years || []}
-        onChange={(event, newValue) => {
-          setYear(newValue);
-          props.changeCountry(country,newValue,props.id);
-        }}
-        inputValue={year || ''}
-        value={year || ''}
-        noOptionsText='Select a Country first'
-        getOptionLabel={(option) => option}
-        style={{ margin: 10 }}
-        renderInput={(params) => <TextField {...params} style={{  maxWidth: 400 }} label="Year" variant="outlined" />}
-      />
-
-    </div>
-  );
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <div>
+        <div>{`value: ${country !== null ? `'${ country.code }'` : 'null'}`}</div>
+        <div>{`year: ${year !== null ? `'${ year }'` : 'null'}`}</div>
+  
+        <Autocomplete
+          onChange={(event, newValue) => {
+            setCountry(newValue);
+            setYear(null);
+          }}
+  
+          options={items}
+          
+          classes={{
+            option: classes.option,
+          }}
+          style={{ margin: 10 }}
+          autoHighlight
+          getOptionLabel={(option) => option.country}
+          renderOption={(option) => (
+            <React.Fragment>
+              <span>{countryToFlag(option.code)}</span>
+              {option.country} ({option.code})
+            </React.Fragment>
+          )}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Choose a country"
+              variant="outlined"
+              style={{  maxWidth: 400 }}
+              inputProps={{
+                ...params.inputProps,
+                autoComplete: 'new-password', // disable autocomplete and autofill
+              }}
+            />
+          )}
+        />
+  
+        <Autocomplete
+          options={ country && country.years || []}
+          onChange={(event, newValue) => {
+            setYear(newValue);
+            props.changeCountry(country,newValue,props.id);
+          }}
+          inputValue={year || ''}
+          value={year || ''}
+          noOptionsText='Select a Country first'
+          getOptionLabel={(option) => option}
+          style={{ margin: 10 }}
+          renderInput={(params) => <TextField {...params} style={{  maxWidth: 400 }} label="Year" variant="outlined" />}
+        />
+  
+      </div>
+    );
+  }
 }
-
-const countries = [
-  { code: 'AD', label: 'Andorra', years: ['2010','2020'] },
-  { code: 'AE', label: 'United Arab Emirates', years: ['2010','2011'] }
-];
