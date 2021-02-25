@@ -35,6 +35,7 @@ export default function CountrySelect(props) {
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
+    //TODO maybe call in Content to avoid two different calls ?
     fetch("/api/countries-years/1/")
       .then(res => res.json())
       .then(
@@ -97,7 +98,7 @@ export default function CountrySelect(props) {
         />
   
         <Autocomplete
-          options={ country && country.years || []}
+          options={ (country || {}).years || []}
           onChange={(event, newValue) => {
             setYear(newValue);
             props.changeCountry(country,newValue,props.id);
