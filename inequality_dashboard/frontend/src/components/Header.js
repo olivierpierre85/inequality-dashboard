@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
       // paddingLeft : "1rem",
       // paddingRight : "1rem",
       textTransform: "capitalize",
-      maxWidth: "400px",
+      maxWidth: "600px",
       background: "black",
       marginTop : "1rem",
       marginBottom : "1rem",
