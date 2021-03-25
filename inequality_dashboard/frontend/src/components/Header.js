@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundSize: "cover",
       backgroundPosition: "50%",
       [theme.breakpoints.up('md')]: {
-        minHeight: 500,
+        minHeight: 300,
       },
     },
     barTitle: {
@@ -26,9 +26,10 @@ const useStyles = makeStyles((theme) => ({
     },
     headerText: {
       textAlign: "left",
+      paddingBottom : "4rem",
       backgroundColor:"#0000007a",
       [theme.breakpoints.up('md')]: {
-        minHeight: 500,
+        minHeight: 300,
       },
     },
     title: {
@@ -41,11 +42,17 @@ const useStyles = makeStyles((theme) => ({
     },
     subtitle: {
       color: "#FFFFFF",
-      paddingTop : "1rem",
-      paddingBottom : "6rem",
-      paddingLeft : "1rem",
-      paddingRight : "1rem",
+      // paddingTop : "1rem",
+      // paddingBottom : "6rem",
+      // paddingLeft : "1rem",
+      // paddingRight : "1rem",
       textTransform: "capitalize",
+      maxWidth: "400px",
+      background: "black",
+      marginTop : "1rem",
+      marginBottom : "1rem",
+      marginLeft : "1rem",
+      marginRight : "1rem",
     },
     menuButton: {
     }
@@ -95,10 +102,10 @@ const Header = (props) => {
           <Toolbar />
           <Paper square elevation={0} className={classes.headerText}>
             <Typography  variant="h1" className={classes.title}>
-              We show you Inequality with Numbers
+              <span>We show you Inequality with Numbers</span>
             </Typography>
             <Typography variant="subtitle1" className={classes.subtitle}>
-              A graphical representation of Inequality in the world, using the latest numbers of the World Inequality Database
+              <span>A graphical representation of Inequality in the world, using the latest numbers of the World Inequality Database</span>
             </Typography>
           </Paper>
       </div>
