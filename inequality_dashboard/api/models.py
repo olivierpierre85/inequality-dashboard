@@ -16,7 +16,11 @@ class IndicatorType(models.Model):
 
 class Indicator(models.Model):
     year = models.CharField(max_length=4, default="")
-    indicator_type = models.ForeignKey(IndicatorType, on_delete=models.CASCADE)
+    # indicator_type = models.ForeignKey(IndicatorType, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    data = models.JSONField()
-
+    # data = models.JSONField()
+    percentile = models.CharField(max_length=256, default="")
+    value = models.DecimalField(max_digits=999, decimal_places=99, default=0)
+    variable = models.CharField(max_length=256, default="")
+    # age
+    # pop

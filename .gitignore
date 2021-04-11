@@ -1,5 +1,6 @@
 .vscode/
 env/
+WID_DATA/
 *.pyc
 api/__pycache__/
 inequality_dashboard/frontend/__pycache__/
