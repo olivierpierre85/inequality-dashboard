@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     headerText: {
       textAlign: "left",
       paddingBottom : "4rem",
-      backgroundColor:"#0000007a",
+      backgroundColor:"#00000000",
       [theme.breakpoints.up('md')]: {
         minHeight: 300,
       },
@@ -42,10 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     subtitle: {
       color: "#FFFFFF",
-      // paddingTop : "1rem",
-      // paddingBottom : "6rem",
-      // paddingLeft : "1rem",
-      // paddingRight : "1rem",
+      padding : "0.5rem",
       textTransform: "capitalize",
       maxWidth: "600px",
       background: "black",
