@@ -12,7 +12,7 @@ class Command(BaseCommand):
             csv_reader = csv.reader(csv_file, delimiter=';')
             line_count = 0
             # empty previous indicators
-            Indicator.objects.all().delete()
+            # Indicator.objects.all().delete()
 
             # list of all variables needed for charts
             variables_list = ['sptinc992j']
