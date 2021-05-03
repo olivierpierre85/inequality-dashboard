@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
 import CountrySelect from './CountrySelect';
+import CustomTreemap from './charts/CustomTreemap';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +79,8 @@ export default function Content() {
           <div>{`p50p90 left : ${countryLeft !== null ? `'${ countryLeft.p50p90 }'` : 'null'}`}</div>
           <div>{`p90p100 left : ${countryLeft !== null ? `'${ countryLeft.p90p100 }'` : 'null'}`}</div>
           <div>{`p99p100 left : ${countryLeft !== null ? `'${ countryLeft.p99p100 }'` : 'null'}`}</div>
+          <Divider variant="middle" />
+          <CustomTreemap data = {countryLeft} /> 
         </Grid>
         <Grid item xs={12} sm={6}>
           <CountrySelect id="right" changeCountry={changeCountry} />
@@ -85,14 +88,12 @@ export default function Content() {
           <div>{`p50p90 right : ${countryRight !== null ? `'${ countryRight.p50p90 }'` : 'null'}`}</div>
           <div>{`p90p100 right : ${countryRight !== null ? `'${ countryRight.p90p100 }'` : 'null'}`}</div>
           <div>{`p99p100 right : ${countryRight !== null ? `'${ countryRight.p99p100 }'` : 'null'}`}</div>
+          <Divider variant="middle" />  
+          <CustomTreemap data = {countryRight} /> 
         </Grid>
 
-        <Grid item xs={12}>
-          <Divider variant="middle" />
-          <p>TEST TEST</p>
-          <p>TEST TEST</p>
-          <Divider variant="middle" />
-          <p>TEST222222222é TEST</p>
+        <Grid item sm={6} xs={12}>
+          <Divider variant="middle" />          
         </Grid>
       </Grid>
     </div>

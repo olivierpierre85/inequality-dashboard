@@ -26,8 +26,10 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "css-loader": "^5.0.1",
+    "d3": "^6.6.2",
     "file-loader": "^6.2.0",
     "react-router-dom": "^5.2.0",
+    "recharts": "^2.0.9",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1"
   }
