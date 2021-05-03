@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       margin: "-60px 30px 0px",
     },
-
+  },
+  treemap: {
+    padding: "10px",
   },
   title: {
     //fontSize : "100px",
@@ -73,28 +75,28 @@ export default function Content() {
             First pick up two countries and year you want to compare 
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={6} >
+        <Grid item  xs={12} sm={6} >
           <CountrySelect id="left" changeCountry={changeCountry} />
           <div>{`p0p50left : ${countryLeft !== null ? `'${ countryLeft.p0p50 }'` : 'null'}`}</div>
           <div>{`p50p90 left : ${countryLeft !== null ? `'${ countryLeft.p50p90 }'` : 'null'}`}</div>
           <div>{`p90p100 left : ${countryLeft !== null ? `'${ countryLeft.p90p100 }'` : 'null'}`}</div>
           <div>{`p99p100 left : ${countryLeft !== null ? `'${ countryLeft.p99p100 }'` : 'null'}`}</div>
-          <Divider variant="middle" />
-          <CustomTreemap data = {countryLeft} /> 
+          <div class={classes.treemap}>
+            <CustomTreemap data = {countryLeft} />  
+          </div>   
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <CountrySelect id="right" changeCountry={changeCountry} />
           <div>{`p0p50 right: ${countryRight!== null ? `'${ countryRight.p0p50 }'` : 'null'}`}</div>
           <div>{`p50p90 right : ${countryRight !== null ? `'${ countryRight.p50p90 }'` : 'null'}`}</div>
           <div>{`p90p100 right : ${countryRight !== null ? `'${ countryRight.p90p100 }'` : 'null'}`}</div>
           <div>{`p99p100 right : ${countryRight !== null ? `'${ countryRight.p99p100 }'` : 'null'}`}</div>
-          <Divider variant="middle" />  
-          <CustomTreemap data = {countryRight} /> 
+          <div class={classes.treemap}>
+            <CustomTreemap data = {countryRight} />          
+          </div>          
         </Grid>
-
-        <Grid item sm={6} xs={12}>
-          <Divider variant="middle" />          
-        </Grid>
+        
       </Grid>
     </div>
     

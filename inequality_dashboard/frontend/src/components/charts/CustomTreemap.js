@@ -7,44 +7,6 @@ const dataTest = [
     name: 'Choose Country and Year',
     size: 50000,
   },
-  // {
-  //   name: 'Rich',
-  //   children: [
-  //     { name: 'AnchorControl', size: 2138 },
-  //     { name: 'ClickControl', size: 3824 },
-  //     { name: 'Control', size: 1353 },
-  //     { name: 'ControlList', size: 4665 },
-  //     { name: 'DragControl', size: 2649 },
-  //     { name: 'ExpandControl', size: 2832 },
-  //     { name: 'HoverControl', size: 4896 },
-  //     { name: 'IControl', size: 763 },
-  //     { name: 'PanZoomControl', size: 5222 },
-  //     { name: 'SelectionControl', size: 7862 },
-  //     { name: 'TooltipControl', size: 8435 },
-  //   ],
-  // },
-  // {
-  //   name: 'Middle Class',
-  //   children: [
-  //     { name: 'Data', size: 20544 },
-  //     { name: 'DataList', size: 19788 },
-  //     { name: 'DataSprite', size: 10349 },
-  //     { name: 'EdgeSprite', size: 3301 },
-  //     { name: 'NodeSprite', size: 19382 },
-  //     { name: 'ScaleBinding', size: 11275 },
-  //     { name: 'Tree', size: 7147 },
-  //     { name: 'TreeBuilder', size: 9930 },
-  //   ],
-  // },
-  // {
-  //   name: 'Poorest ',
-  //   children: [
-  //     { name: 'DataEvent', size: 7313 },
-  //     { name: 'SelectionEvent', size: 6880 },
-  //     { name: 'TooltipEvent', size: 3701 },
-  //     { name: 'VisualizationEvent', size: 2117 },
-  //   ],
-  // },
 ];
 
 const COLORS = ['#8889DD', '#9597E4', '#8DC77B', '#A5D297', '#E2CF45', '#F8C12D'];
@@ -52,7 +14,6 @@ const COLORS = ['#8889DD', '#9597E4', '#8DC77B', '#A5D297', '#E2CF45', '#F8C12D'
 class CustomizedContent extends PureComponent {
   render() {
     const { root, depth, x, y, width, height, index, payload, colors, rank, name } = this.props;
-
 
     return (
       <g>
@@ -113,13 +74,13 @@ export default class CustomTreemap extends PureComponent {
         bottom50.children.push({size:bottom50Child});
       }
 
-      chartData= [top1,top10,top50,bottom50];
+      chartData = [top1,top10,top50,bottom50];
     }
 
     return (
+      <ResponsiveContainer margin={{ top: 100, left: 100, right: 100, bottom: 100 }} height={400}>
         <Treemap
-          width={600}
-          height={300}
+          class = "test"
           data={chartData}
           dataKey="size"
           ratio={4 / 3}
@@ -127,6 +88,7 @@ export default class CustomTreemap extends PureComponent {
           fill="#8884d8"
           content={<CustomizedContent colors={COLORS} />}
         />
+      </ResponsiveContainer>
     );
   }
 }
