@@ -33,6 +33,8 @@ def countries_years_list(request,indicator_id):
             years=[]
         years.append(i.year)
         last_country = i.country
+    years = list(set(years))
+    years.sort()
     country_list.append({"code":last_country.code, "country":last_country.name,"years":years})
 
     #results = CountriesYearsSerializer(country_list, many=True).data
