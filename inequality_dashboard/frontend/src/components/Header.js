@@ -5,11 +5,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
-import { red } from "@material-ui/core/colors";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +22,12 @@ const useStyles = makeStyles((theme) => ({
     },
     barTitle: {
       textAlign: "center",
-      width: "100%",
+      width: "100px",
+      textTransform: "uppercase",
+    },
+    barLogo: {
+      textAlign: "left",
+      //width: "100%",
       textTransform: "uppercase",
     },
     headerText: {
@@ -52,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
       marginRight : "1rem",
     },
     menuButton: {
+      width : "100%" ,
     }
   }));
 
@@ -69,6 +76,18 @@ const Header = (props) => {
     setAnchorEl(null);
   };
 
+  const inequalityLogo = (
+    <Button
+    {...{
+        key: "home",
+        color: "inherit",
+        to: "/",
+        component: Link,
+        className: classes.barLogo
+    }}
+  >Inequality Dashboard</Button>
+  );
+
   return (
       <div className={classes.root}
       style={{ 
@@ -77,9 +96,9 @@ const Header = (props) => {
         >
           <AppBar position="fixed">
             <Toolbar>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+              {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 <MenuIcon />
-              </IconButton>
+              </IconButton> */}
               <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
@@ -91,9 +110,25 @@ const Header = (props) => {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
-              <Typography variant="button" className={classes.barTitle}>
-                Inequality Dashboard
-              </Typography>
+              { inequalityLogo }
+              <Button
+                {...{
+                    key: "Demo",
+                    color: "inherit",
+                    to: "/demo",
+                    component: Link,
+                    className: classes.menuButton
+                }}
+              >Demo</Button>
+              <Button
+                {...{
+                    key: "test",
+                    color: "inherit",
+                    to: "/test",
+                    component: Link,
+                    className: classes.menuButton
+                }}
+              >Inequality Animation</Button>
             </Toolbar>
           </AppBar>
           <Toolbar />
