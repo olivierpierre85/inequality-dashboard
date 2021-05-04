@@ -10,7 +10,7 @@ const Introduction = () => {
             </Typography>
             
             <Typography variant="body">
-                Welle
+                This website goal is to provide a visual representation of the data about income inequality
             </Typography>
         </main>        
     )
