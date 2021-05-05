@@ -1,16 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
+import { Paper, Link, Toolbar,Typography, IconButton, Button, Drawer } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +16,16 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 300,
       },
     },
+    toolbar: {
+      display: "flex",
+      justifyContent: "space-between",
+      paddingRight: "60px",
+      paddingLeft: "60px",
+      "@media (max-width: 900px)": {
+        paddingLeft: "20px",
+        paddingRight: "20px",
+      },
+    },
     barTitle: {
       textAlign: "center",
       width: "100px",
@@ -27,8 +33,19 @@ const useStyles = makeStyles((theme) => ({
     },
     barLogo: {
       textAlign: "left",
-      //width: "100%",
       textTransform: "uppercase",
+      color: "white",
+    },
+    menuButton: {
+      paddingLeft: "20px",
+      paddingRight: "20px",
+    },
+    drawerContainer: {
+      padding: "20px 30px",
+      textAlign : "center",
+    },
+    drawerItem: {
+      justifyContent : "center",
     },
     headerText: {
       textAlign: "left",
@@ -57,36 +74,121 @@ const useStyles = makeStyles((theme) => ({
       marginLeft : "1rem",
       marginRight : "1rem",
     },
-    menuButton: {
-      width : "100%" ,
-    }
   }));
 
 const Header = (props) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const classes = useStyles();
   const { image } = props;
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [state, setState] = useState({
+    mobileView: false,
+    drawerOpen: false,
+  });
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { mobileView, drawerOpen } = state;
+
+  useEffect(() => {
+    const setResponsiveness = () => {
+      return window.innerWidth < 900
+        ? setState((prevState) => ({ ...prevState, mobileView: true }))
+        : setState((prevState) => ({ ...prevState, mobileView: false }));
+    };
+    setResponsiveness();
+
+    window.addEventListener("resize", () => setResponsiveness());
+  }, []);
 
   const inequalityLogo = (
-    <Button
-    {...{
-        key: "home",
-        color: "inherit",
-        to: "/",
-        component: Link,
-        className: classes.barLogo
-    }}
-  >Inequality Dashboard</Button>
+    <Typography className={classes.barLogo} >
+      <Link color="inherit" underline="none" component={RouterLink} to="/" >
+      Inequality Dashboard
+      </Link>
+    </Typography>
   );
+
+  const displayMobile = () => {
+    const handleDrawerOpen = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const handleDrawerClose = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: false }));
+
+    return (
+      <Toolbar className={classes.toolbar}>
+        { inequalityLogo }
+        <IconButton edge="start"  color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleDrawerOpen}>
+          <MenuIcon />
+        </IconButton>
+        <Drawer className={classes.drawerContainer}
+          {...{
+            anchor: "top",
+            open: drawerOpen,
+            onClose: handleDrawerClose,
+          }}
+        >
+          <Link
+            {...{
+              component: RouterLink,
+              to: "/",
+              color: "inherit",
+              key: "Home",
+              onClick:handleDrawerClose
+            }}
+          >
+            <MenuItem className={classes.drawerItem}>Home</MenuItem>
+          </Link>
+          <Link
+            {...{
+              component: RouterLink,
+              to: "/demo",
+              color: "inherit",
+              key: "Demo",
+              onClick:handleDrawerClose
+            }}
+          >
+            <MenuItem className={classes.drawerItem}>Demo</MenuItem>
+          </Link>
+        </Drawer>
+      </Toolbar>
+    )
+  }
+
+  const displayDesktop = () => {
+    return (
+      <Toolbar className={classes.toolbar}>
+        { inequalityLogo }
+        <div>
+        <Button
+          {...{
+              key: "Home",
+              color: "inherit",
+              to: "/",
+              component: RouterLink,
+              className: classes.menuButton
+          }}
+        >Home</Button>
+        <Button
+          {...{
+              key: "Demo",
+              color: "inherit",
+              to: "/demo",
+              component: RouterLink,
+              className: classes.menuButton
+          }}
+        >Demo</Button>
+        <Button
+          {...{
+              key: "Test",
+              color: "inherit",
+              to: "/test",
+              component: RouterLink,
+              className: classes.menuButton,
+              whiteSpace: 'nowrap',
+          }}
+        >Inequality Animation</Button>
+        </div>
+    </Toolbar>
+    );
+  };
 
   return (
       <div className={classes.root}
@@ -95,41 +197,7 @@ const Header = (props) => {
       }}
         >
           <AppBar position="fixed">
-            <Toolbar>
-              {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                <MenuIcon />
-              </IconButton> */}
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
-              { inequalityLogo }
-              <Button
-                {...{
-                    key: "Demo",
-                    color: "inherit",
-                    to: "/demo",
-                    component: Link,
-                    className: classes.menuButton
-                }}
-              >Demo</Button>
-              <Button
-                {...{
-                    key: "test",
-                    color: "inherit",
-                    to: "/test",
-                    component: Link,
-                    className: classes.menuButton
-                }}
-              >Inequality Animation</Button>
-            </Toolbar>
+          {mobileView ? displayMobile() : displayDesktop()}
           </AppBar>
           <Toolbar />
           <Paper square elevation={0} className={classes.headerText}>
