@@ -21,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "space-between",
       paddingRight: "60px",
       paddingLeft: "60px",
-      "@media (max-width: 900px)": {
-        paddingLeft: "20px",
-        paddingRight: "20px",
-      },
     },
     barTitle: {
       textAlign: "center",
@@ -51,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "left",
       paddingBottom : "4rem",
       backgroundColor:"#00000000",
-      [theme.breakpoints.up('md')]: {
-        minHeight: 300,
-      },
+      // [theme.breakpoints.up('md')]: {
+      //   minHeight: 300,
+      // },
     },
     title: {
       color: "#FFFFFF",

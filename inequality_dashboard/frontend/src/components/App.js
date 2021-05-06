@@ -41,11 +41,7 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={theme}>
           <Router history={history}>
-            
-            <Header image={backgroundImage}/>
-
-            <Content/>
-
+              <Content/>
           </Router>
       </ThemeProvider>      
     );

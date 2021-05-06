@@ -9,6 +9,7 @@ import CustomTreemap from './charts/CustomTreemap';
 const useStyles = makeStyles((theme) => ({
   title: {
     //fontSize : "100px",
+    padding: "20px",
   }
 }));
 
