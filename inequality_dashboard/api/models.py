@@ -10,17 +10,25 @@ class Country(models.Model):
 
 class IndicatorType(models.Model):
     name = models.CharField(max_length=256, default="",unique=True)
-    #percentile
+    description = models.TextField( default="",unique=True)    
+    stat_variable = models.CharField(max_length=256, default="")
+    percentiles = models.ManyToManyField('IndicatorPercentile')
+
+    def __str__(self):
+        return self.name
+
+class IndicatorPercentile(models.Model):
+    name = models.CharField(max_length=30, default="",unique=True)
+
     def __str__(self):
         return self.name
 
 class Indicator(models.Model):
     year = models.CharField(max_length=4, default="")
-    # indicator_type = models.ForeignKey(IndicatorType, on_delete=models.CASCADE)
+    indicator_type = models.ForeignKey(IndicatorType, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    # data = models.JSONField()
-    percentile = models.CharField(max_length=256, default="")
     value = models.DecimalField(max_digits=999, decimal_places=99, default=0)
-    variable = models.CharField(max_length=256, default="")
-    # age
-    # pop
+    percentile = models.CharField(max_length=30, default="")    
+
+    def __str__(self):
+        return self.country.code + "_" + self.indicator_type.stat_variable + "_" + self.percentile + "_" + self.year
