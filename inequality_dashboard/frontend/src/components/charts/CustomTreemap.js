@@ -55,7 +55,7 @@ export default class CustomTreemap extends PureComponent {
       var top1 = { name: "Richest", size:data.p99p100};
       var top10 = { name: "Top 10"};
       top10.children = [];
-      let top10Child = data.p90p100 / 9;
+      let top10Child = data.p90p99 / 9;
       for (var i = 0; i < 9; i++){
         top10.children.push({size:top10Child});
       }

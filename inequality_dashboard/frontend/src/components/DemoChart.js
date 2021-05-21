@@ -22,7 +22,7 @@ export default function DemoChart() {
   
   function changeCountry(country,year,id) {
     //API call to get values for the country/year and store them in state
-    fetch("/api/chart-country-year/1/"+ country.code + "/" + year)
+    fetch("/api/average-income-repartition/"+ country.code + "/" + year)
       .then(res => res.json())
       .then(
         (result) => {
@@ -41,7 +41,6 @@ export default function DemoChart() {
           setError(error);
         }
       )
-    
   }
 
   return (    
@@ -59,7 +58,7 @@ export default function DemoChart() {
         <CountrySelect id="left" changeCountry={changeCountry} />
         <div>{`p0p50left : ${countryLeft !== null ? `'${ countryLeft.p0p50 }'` : 'null'}`}</div>
         <div>{`p50p90 left : ${countryLeft !== null ? `'${ countryLeft.p50p90 }'` : 'null'}`}</div>
-        <div>{`p90p100 left : ${countryLeft !== null ? `'${ countryLeft.p90p100 }'` : 'null'}`}</div>
+        <div>{`p90p99 left : ${countryLeft !== null ? `'${ countryLeft.p90p99 }'` : 'null'}`}</div>
         <div>{`p99p100 left : ${countryLeft !== null ? `'${ countryLeft.p99p100 }'` : 'null'}`}</div>
         <div class={classes.treemap}>
           <CustomTreemap data = {countryLeft} />  
@@ -70,7 +69,7 @@ export default function DemoChart() {
         <CountrySelect id="right" changeCountry={changeCountry} />
         <div>{`p0p50 right: ${countryRight!== null ? `'${ countryRight.p0p50 }'` : 'null'}`}</div>
         <div>{`p50p90 right : ${countryRight !== null ? `'${ countryRight.p50p90 }'` : 'null'}`}</div>
-        <div>{`p90p100 right : ${countryRight !== null ? `'${ countryRight.p90p100 }'` : 'null'}`}</div>
+        <div>{`p90p99 right : ${countryRight !== null ? `'${ countryRight.p90p99 }'` : 'null'}`}</div>
         <div>{`p99p100 right : ${countryRight !== null ? `'${ countryRight.p99p100 }'` : 'null'}`}</div>
         <div class={classes.treemap}>
           <CustomTreemap data = {countryRight} />          
