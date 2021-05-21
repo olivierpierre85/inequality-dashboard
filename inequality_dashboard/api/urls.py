@@ -7,6 +7,6 @@ urlpatterns = [
     path('countries', CountryView.as_view()),
     path('indicators', IndicatorView.as_view()),
     path('countries-years/<int:indicator_id>/', views.countries_years_list),
-    path('chart-country-year/<int:chart_id>/<str:country_code>/<int:year>', views.country_year_chart),
-    path('test', views.test_view ),
+    path('average-income-repartition/<str:country_code>/<int:year>', views.average_income_repartition),
+    path('average-income-value/<str:country_code>/<int:year>', views.average_income_value),
 ]
