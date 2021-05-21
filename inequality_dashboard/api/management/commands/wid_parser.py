@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # TODO open all country files in folder 
-        with open('/home/olpi/projects/inequality-dashboard/WID_DATA/WID_data_BE.csv') as csv_file:
+        with open('/home/olpi/projects/inequality-dashboard/WID_DATA/WID_data_AE.csv') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=';')
             line_count = 0
             # empty previous indicators

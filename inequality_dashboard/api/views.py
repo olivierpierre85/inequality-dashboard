@@ -17,12 +17,11 @@ class IndicatorView(generics.ListAPIView):
     queryset = Indicator.objects.all()
     serializer_class = IndicatorSerializer
 
-def countries_years_list(request,indicator_id):
+def avg_income_countries_years(request):
     """ Return the list of countries and years available with data """
-
-    # TODO filter on inidcaotrid
     # TODO USE PROPERLY SERIALIZER
-    indicators = Indicator.objects.all().order_by('country')
+    indicator_type_val = IndicatorType.objects.filter( stat_variable="sptinc992j").first()
+    indicators = Indicator.objects.filter( indicator_type=indicator_type_val).order_by('country')
     last_country = indicators[0].country
     country_list = []
     years = []
@@ -39,46 +38,44 @@ def countries_years_list(request,indicator_id):
     #results = CountriesYearsSerializer(country_list, many=True).data
     return HttpResponse(json.dumps(country_list))
 
-def average_income_repartition(request,country_code,year):
-    """ Return average_income_repartition """
-    indicator_type_rep = IndicatorType.objects.filter( stat_variable="sptinc992j").first()
-    country = Country.objects.filter(code=country_code).first()
-    #TODO check if country doesn't exists
-    percentile_repartition = {}
-    avg_income_repartition = Indicator.objects.filter(country=country,year=year, indicator_type=indicator_type_rep)
-    for i in avg_income_repartition :
-        percentile_repartition[i.percentile] = float(i.value)
-
-    # replace p90p100 by p90p99 for consistency ( compute because p90p99 is not provided in dataset)
-    percentile_repartition["p90p99"] = percentile_repartition["p90p100"] - percentile_repartition["p99p100"]
-    del percentile_repartition["p90p100"]
-
-    # TODO create real serializer for this
-    return HttpResponse(json.dumps(percentile_repartition))
-
-def average_income_value(request,country_code,year):
+def average_income_list(request, country_code, year = None):
     """ Return average_income_value for 100 People"""
     indicator_type_rep = IndicatorType.objects.filter( stat_variable="sptinc992j").first()
     country = Country.objects.filter(code=country_code).first()
     #TODO check if country doesn't exists
-    percentile_repartition = {}
-    avg_income_repartition = Indicator.objects.filter(country=country,year=year, indicator_type=indicator_type_rep)
-    for i in avg_income_repartition :
-        percentile_repartition[i.percentile] = float(i.value)
+    result = []
+    if year == None :
+        #avg_income_repartition = Indicator.objects.filter(country=country, indicator_type=indicator_type_rep).order_by(year)
+        # Get all years for the indicator
+        years = Indicator.objects.filter(country=country, indicator_type=indicator_type_rep).values_list('year').distinct()
+    else:
+        years = [ (year,) ]
 
-    # replace p90p100 by p90p99 for consistency ( compute because p90p99 is not provided in dataset)
-    percentile_repartition["p90p99"] = percentile_repartition["p90p100"] - percentile_repartition["p99p100"]
-    del percentile_repartition["p90p100"]
+    for (y,) in years:
+        avg_income_list = {}
+        avg_income_repartition = Indicator.objects.filter(country=country,year=y, indicator_type=indicator_type_rep)
+    
+        for i in avg_income_repartition :
+            avg_income_list[i.percentile] = { "percent" : float(i.value)}
 
-    indicator_type_val = IndicatorType.objects.filter( stat_variable="anninc992i").first()
-    avg_income_val = Indicator.objects.filter(country=country,year=year, indicator_type=indicator_type_val).first()
-    total_income_100 = avg_income_val.value * 100
+        # replace p90p100 by p90p99 for consistency ( compute because p90p99 is not provided in dataset)
+        avg_income_list["p90p99"] = { "percent" : (avg_income_list["p90p100"]["percent"] - avg_income_list["p99p100"]["percent"]) }
+        del avg_income_list["p90p100"]
 
-    percentile_value = {}
-    for per, val in percentile_repartition.items():
-        indicator_percentile = IndicatorPercentile.objects.filter( name=per).first()
-        percentile_value[per] = round((val * float(total_income_100)) / indicator_percentile.size , 2 )
+        indicator_type_val = IndicatorType.objects.filter( stat_variable="anninc992i").first()
+        avg_income_val = Indicator.objects.filter(country=country,year=y, indicator_type=indicator_type_val).first()        
+        total_income_100 = avg_income_val.value * 100
 
-    # TODO create real serializer for this
-    return HttpResponse(json.dumps(percentile_value))
+        for per, val in avg_income_list.items():
+            indicator_percentile = IndicatorPercentile.objects.filter( name=per).first()
+            avg_income_list[per]["avg_income"] = round((val["percent"] * float(total_income_100)) / indicator_percentile.size , 2 )
+
+        # Add Average for all
+        indicator_percentile = IndicatorPercentile.objects.filter( name=avg_income_val.percentile).first()
+        avg_income_list[avg_income_val.percentile] = {"avg_income" : float(avg_income_val.value), "percent" : indicator_percentile.size }
+
+        result.append ({y : avg_income_list})
+        # TODO create real serializer for this
+
+    return HttpResponse(json.dumps(result))
 
