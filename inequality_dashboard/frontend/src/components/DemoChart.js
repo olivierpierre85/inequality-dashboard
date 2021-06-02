@@ -22,15 +22,15 @@ export default function DemoChart() {
   
   function changeCountry(country,year,id) {
     //API call to get values for the country/year and store them in state
-    fetch("/api/average-income-repartition/"+ country.code + "/" + year)
+    fetch("/api/avg-income-list/"+ country.code + "/" + year)
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
           if (id == "left") {
-            setCountryLeft(result);
+            setCountryLeft(result[0][Object.keys(result[0])[0]]);
           } else {
-            setCountryRight(result);
+            setCountryRight(result[0][Object.keys(result[0])[0]]);
           }          
         },
         // Note: it's important to handle errors here
@@ -56,10 +56,6 @@ export default function DemoChart() {
       </Grid>
       <Grid item  xs={12} sm={6} >
         <CountrySelect id="left" changeCountry={changeCountry} />
-        <div>{`p0p50left : ${countryLeft !== null ? `'${ countryLeft.p0p50 }'` : 'null'}`}</div>
-        <div>{`p50p90 left : ${countryLeft !== null ? `'${ countryLeft.p50p90 }'` : 'null'}`}</div>
-        <div>{`p90p99 left : ${countryLeft !== null ? `'${ countryLeft.p90p99 }'` : 'null'}`}</div>
-        <div>{`p99p100 left : ${countryLeft !== null ? `'${ countryLeft.p99p100 }'` : 'null'}`}</div>
         <div class={classes.treemap}>
           <CustomTreemap data = {countryLeft} />  
         </div>   
@@ -67,15 +63,10 @@ export default function DemoChart() {
 
       <Grid item xs={12} sm={6}>
         <CountrySelect id="right" changeCountry={changeCountry} />
-        <div>{`p0p50 right: ${countryRight!== null ? `'${ countryRight.p0p50 }'` : 'null'}`}</div>
-        <div>{`p50p90 right : ${countryRight !== null ? `'${ countryRight.p50p90 }'` : 'null'}`}</div>
-        <div>{`p90p99 right : ${countryRight !== null ? `'${ countryRight.p90p99 }'` : 'null'}`}</div>
-        <div>{`p99p100 right : ${countryRight !== null ? `'${ countryRight.p99p100 }'` : 'null'}`}</div>
         <div class={classes.treemap}>
           <CustomTreemap data = {countryRight} />          
         </div>          
       </Grid>
-  
     </Grid>    
   );
 }

@@ -36,7 +36,7 @@ export default function CountrySelect(props) {
 
   React.useEffect(() => {
     //TODO maybe call in Content to avoid two different calls ?
-    fetch("/api/countries-years/1/")
+    fetch("/api/avg-income-countries-years/")
       .then(res => res.json())
       .then(
         (result) => {

@@ -27,12 +27,14 @@ def avg_income_countries_years(request):
     years = []
     for i in indicators:
         if last_country.name != i.country.name:
+            years = list(set(years))
+            years.sort(reverse=True)
             country_list.append({"code":last_country.code ,"country":last_country.name,"years":years})
             years=[]
         years.append(i.year)
         last_country = i.country
     years = list(set(years))
-    years.sort()
+    years.sort(reverse=True)
     country_list.append({"code":last_country.code, "country":last_country.name,"years":years})
 
     #results = CountriesYearsSerializer(country_list, many=True).data
