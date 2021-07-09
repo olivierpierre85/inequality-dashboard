@@ -173,14 +173,14 @@ const Header = (props) => {
         >Demo</Button>
         <Button
           {...{
-              key: "Test",
+              key: "Tour",
               color: "inherit",
-              to: "/test",
+              to: "/tour",
               component: RouterLink,
               className: classes.menuButton,
               whiteSpace: 'nowrap',
           }}
-        >Inequality Animation</Button>
+        >Inequality Quick Tour</Button>
         </div>
     </Toolbar>
     );

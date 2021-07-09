@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Route, Router, Switch } from "react-router-dom";
 import Introduction from './Introduction';
 import DemoChart from './DemoChart';
+import DemoTour from './DemoTour';
 import backgroundImage from './img/inequality-golf.jpg'; 
 import Header from './Header';
 
@@ -38,6 +39,7 @@ export default function Content() {
         <Switch>
             <Route exact path="/" render={(props) => <Introduction></Introduction>} />
             <Route exact path="/demo" render={(props) => <DemoChart></DemoChart>} />
+            <Route exact path="/tour" render={(props) => <DemoTour></DemoTour>} />
         </Switch>
       </div>
     </div>
