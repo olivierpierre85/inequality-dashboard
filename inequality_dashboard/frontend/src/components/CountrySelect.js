@@ -34,6 +34,8 @@ export default function CountrySelect(props) {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [items, setItems] = React.useState([]);
 
+  const { id } = props;
+
   React.useEffect(() => {
     //TODO maybe call in Content to avoid two different calls ?
     fetch("/api/avg-income-countries-years/")
@@ -59,7 +61,7 @@ export default function CountrySelect(props) {
     return <div>Loading...</div>;
   } else {
     return (
-      <div>
+      <div id={id}>
         <div>{`value: ${country !== null ? `'${ country.code }'` : 'null'}`}</div>
         <div>{`year: ${year !== null ? `'${ year }'` : 'null'}`}</div>
   
@@ -68,7 +70,7 @@ export default function CountrySelect(props) {
             setCountry(newValue);
             setYear(null);
           }}
-  
+          
           options={items}
           
           classes={{

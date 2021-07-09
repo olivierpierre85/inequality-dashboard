@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { Divider } from '@material-ui/core';
 import CountrySelect from './CountrySelect';
 import CustomTreemap from './charts/CustomTreemap';
+import Tour from './Tour';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -52,6 +52,7 @@ export default function DemoTour() {
         
         <Typography variant="body">
           First pick up on country to see its inequality
+          <Tour></Tour>
         </Typography>
       </Grid>
       <Grid item  xs={12} sm={12} >
