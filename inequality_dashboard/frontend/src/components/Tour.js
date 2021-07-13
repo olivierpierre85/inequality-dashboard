@@ -6,13 +6,13 @@ import JoyRide from "react-joyride";
 // Tour steps
 const TOUR_STEPS = [
   {
-    target: "#left",
-    content: "This is where you can search the dashboard.",
-  },
-  {
     target: ".recharts-responsive-container",
     content:
       "CHARTTTTTTTTTT"
+  },
+  {
+    target: "#left",
+    content: "This is where you can search the dashboard.",
   },
 ];
 
@@ -25,8 +25,8 @@ const Tour = () => {
         continuous={true}
         showSkipButton={true}
         locale={{
-          last: "End tour",
-          skip: "Close tour"
+          last: "End Tour",
+          skip: "Close Tour"
         }}
       />
     </>

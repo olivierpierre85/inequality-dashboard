@@ -18,7 +18,6 @@ export default function DemoTour() {
 
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [countryLeft, setCountryLeft]= React.useState('');
-  const [countryRight, setCountryRight]= React.useState('');
   
   function changeCountry(country,year,id) {
     //API call to get values for the country/year and store them in state
@@ -47,12 +46,12 @@ export default function DemoTour() {
     <Grid container spacing={3} >
       <Grid item xs={12}>
         <Typography  variant="h2" className={classes.title}>
-          Comparison            
+          Welcome to our Explanation Tour
+          <Tour></Tour>           
         </Typography>
         
-        <Typography variant="body">
-          First pick up on country to see its inequality
-          <Tour></Tour>
+        <Typography variant="h4">
+          First pick up a country from our list
         </Typography>
       </Grid>
       <Grid item  xs={12} sm={12} >

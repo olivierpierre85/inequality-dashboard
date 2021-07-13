@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
-import CountrySelect from './CountrySelect';
+import CountryYearSelect from './CountryYearSelect';
 import CustomTreemap from './charts/CustomTreemap';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,14 +55,14 @@ export default function DemoChart() {
         </Typography>
       </Grid>
       <Grid item  xs={12} sm={6} >
-        <CountrySelect id="left" changeCountry={changeCountry} />
+        <CountryYearSelect id="left" changeCountry={changeCountry} />
         <div class={classes.treemap}>
           <CustomTreemap data = {countryLeft} />  
         </div>   
       </Grid>
 
       <Grid item xs={12} sm={6}>
-        <CountrySelect id="right" changeCountry={changeCountry} />
+        <CountryYearSelect id="right" changeCountry={changeCountry} />
         <div class={classes.treemap}>
           <CustomTreemap data = {countryRight} />          
         </div>          

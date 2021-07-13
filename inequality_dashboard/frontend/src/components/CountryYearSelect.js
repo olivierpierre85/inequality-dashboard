@@ -24,12 +24,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CountrySelect(props) {
+export default function CountryYearSelect(props) {
   const classes = useStyles();
 
   const [country, setCountry] = React.useState('');
-  const [firstYear, setFirstYear] = React.useState('');
-  const [lastYear, setLastYear] = React.useState('');
+  const [year, setYear] = React.useState('');
 
   const [error, setError] = React.useState(null);
   const [isLoaded, setIsLoaded] = React.useState(false);
@@ -64,12 +63,12 @@ export default function CountrySelect(props) {
     return (
       <div id={id}>
         <div>{`value: ${country !== null ? `'${ country.code }'` : 'null'}`}</div>
-        <div>{`max year: ${country.years !== undefined ? `'${ Math.max(...country.years) }'` : 'Not selected'}`}</div>
-        { <div>{`min year: ${country.years !== undefined ? `'${ Math.min(...country.years) }'` : 'Not selected'}`}</div> }
+        <div>{`year: ${year !== null ? `'${ year }'` : 'null'}`}</div>
   
         <Autocomplete
           onChange={(event, newValue) => {
             setCountry(newValue);
+            setYear(null);
           }}
           
           options={items}
@@ -98,7 +97,22 @@ export default function CountrySelect(props) {
               }}
             />
           )}
-        />  
+        />
+  
+        <Autocomplete
+          options={ (country || {}).years || []}
+          onChange={(event, newValue) => {
+            setYear(newValue);
+            props.changeCountry(country,newValue,props.id);
+          }}
+          inputValue={year || ''}
+          value={year || ''}
+          noOptionsText='Select a Country first'
+          getOptionLabel={(option) => option}
+          style={{ margin: 10 }}
+          renderInput={(params) => <TextField {...params} style={{  maxWidth: 400 }} label="Year" variant="outlined" />}
+        />
+  
       </div>
     );
   }
