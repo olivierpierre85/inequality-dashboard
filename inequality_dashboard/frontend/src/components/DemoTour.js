@@ -19,6 +19,7 @@ export default function DemoTour() {
 
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [countryLeft, setCountryLeft]= React.useState('');
+  const [evolutionData, setEvolutionData]= React.useState('');
   
   function changeCountry(country,year,id) {
     //API call to get values for the country/year and store them in state
@@ -29,9 +30,8 @@ export default function DemoTour() {
           setIsLoaded(true);
           if (id == "left") {
             setCountryLeft(result[year]);
-          } else {
-            setCountryRight(result[year]);
-          }          
+            setEvolutionData(result)
+          }       
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -62,7 +62,7 @@ export default function DemoTour() {
         </div>   
 
         <div class={classes.linechart}>
-          <CustomLineChart data = {countryLeft} />  
+          <CustomLineChart data = {evolutionData} />  
         </div>
       </Grid>
     </Grid>    
