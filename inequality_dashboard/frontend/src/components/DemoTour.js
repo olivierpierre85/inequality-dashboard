@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CountrySelect from './CountrySelect';
 import CustomTreemap from './charts/CustomTreemap';
+import CustomLineChart from './charts/CustomLineChart';
 import Tour from './Tour';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,15 +22,15 @@ export default function DemoTour() {
   
   function changeCountry(country,year,id) {
     //API call to get values for the country/year and store them in state
-    fetch("/api/avg-income-list/"+ country.code + "/" + year)
+    fetch("/api/avg-income-list/"+ country.code )
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
           if (id == "left") {
-            setCountryLeft(result[0][Object.keys(result[0])[0]]);
+            setCountryLeft(result[year]);
           } else {
-            setCountryRight(result[0][Object.keys(result[0])[0]]);
+            setCountryRight(result[year]);
           }          
         },
         // Note: it's important to handle errors here
@@ -59,6 +60,10 @@ export default function DemoTour() {
         <div class={classes.treemap}>
           <CustomTreemap data = {countryLeft} />  
         </div>   
+
+        <div class={classes.linechart}>
+          <CustomLineChart data = {countryLeft} />  
+        </div>
       </Grid>
     </Grid>    
   );

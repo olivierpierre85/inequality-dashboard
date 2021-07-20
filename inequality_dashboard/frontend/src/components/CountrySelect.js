@@ -28,8 +28,6 @@ export default function CountrySelect(props) {
   const classes = useStyles();
 
   const [country, setCountry] = React.useState('');
-  const [firstYear, setFirstYear] = React.useState('');
-  const [lastYear, setLastYear] = React.useState('');
 
   const [error, setError] = React.useState(null);
   const [isLoaded, setIsLoaded] = React.useState(false);
@@ -70,6 +68,8 @@ export default function CountrySelect(props) {
         <Autocomplete
           onChange={(event, newValue) => {
             setCountry(newValue);
+            //In this case gets the biggest year for the country
+            props.changeCountry(newValue,Math.max(...newValue.years) ,props.id);
           }}
           
           options={items}

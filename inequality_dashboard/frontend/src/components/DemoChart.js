@@ -28,9 +28,9 @@ export default function DemoChart() {
         (result) => {
           setIsLoaded(true);
           if (id == "left") {
-            setCountryLeft(result[0][Object.keys(result[0])[0]]);
+            setCountryLeft(result[year]);
           } else {
-            setCountryRight(result[0][Object.keys(result[0])[0]]);
+            setCountryRight(result[year]);
           }          
         },
         // Note: it's important to handle errors here
