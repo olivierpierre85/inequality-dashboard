@@ -45,7 +45,7 @@ def average_income_list(request, country_code, year = None):
     indicator_type_rep = IndicatorType.objects.filter( stat_variable="sptinc992j").first()
     country = Country.objects.filter(code=country_code).first()
     #TODO check if country doesn't exists
-    result = []
+    result = {}
     if year == None :
         #avg_income_repartition = Indicator.objects.filter(country=country, indicator_type=indicator_type_rep).order_by(year)
         # Get all years for the indicator
@@ -76,7 +76,7 @@ def average_income_list(request, country_code, year = None):
         indicator_percentile = IndicatorPercentile.objects.filter( name=avg_income_val.percentile).first()
         avg_income_list[avg_income_val.percentile] = {"avg_income" : float(avg_income_val.value), "percent" : indicator_percentile.size }
 
-        result.append ({y : avg_income_list})
+        result[y] = avg_income_list
         # TODO create real serializer for this
 
     return HttpResponse(json.dumps(result))
