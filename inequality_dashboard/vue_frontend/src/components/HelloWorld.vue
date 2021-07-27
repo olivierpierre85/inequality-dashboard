@@ -1,6 +1,24 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <div v-if="showBooks">
+      <ul>
+        <li @click="toggleFav(book)" v-for="book in books" v-bind:key="book" :class="{ fav: book.isFav }">
+          <img :src="book.img" :alt="book.title">
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      <p>Click the button below to show books</p>
+    </div>
+    
+    <button @click="toggleShowBooks">
+      <span v-if="showBooks">Hide books</span>
+      <span v-else>Show books</span>
+    </button>
+
     <p>ENV
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -35,6 +53,25 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      showBooks: true,
+      books: [
+        { title: 'name of the wind', author: 'patrick rothfuss', img: 'assets/1.jpg', isFav: true },
+        { title: 'the way of kings', author: 'brandon sanderson', img: 'assets/2.jpg', isFav: false },
+        { title: 'the final empire', author: 'brandon sanderson', img: 'assets/3.jpg', isFav: true },
+      ],
+    }
+  },
+  methods: {
+    toggleShowBooks() {
+      this.showBooks =  !this.showBooks
+    },
+    toggleFav(book) {
+      console.log(book);
+      book.isFav = ! book.isFav
+    }
   }
 }
 </script>
