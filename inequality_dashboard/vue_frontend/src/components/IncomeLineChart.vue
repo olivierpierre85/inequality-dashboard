@@ -36,13 +36,9 @@ export default defineComponent({
     [THEME_KEY]: "white"
   },
   setup () {
-    fetch(ROOT_PATH + '/api/avg-income-list/' + currentCountry)
-        .then(response => response.json())
-        .then(data => {
-        console.log(data);
-        const option = ref({
+    let option = ref({
         title: {
-            text: '堆叠区域图'
+            text: 'YEAh'
         },
         tooltip: {
             trigger: 'axis',
@@ -52,9 +48,6 @@ export default defineComponent({
                     backgroundColor: '#6a7985'
                 }
             }
-        },
-        legend: {
-            data: ['t', 's', 'z', 'z', 'w']
         },
         grid: {
             left: '3%',
@@ -66,7 +59,7 @@ export default defineComponent({
             {
                 type: 'category',
                 boundaryGap: false,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: []
             }
         ],
         yAxis: [
@@ -76,14 +69,14 @@ export default defineComponent({
         ],
         series: [
             {
-                name: '邮件营销',
+                name: 'Top 1',
                 type: 'line',
                 stack: '总量',
                 areaStyle: {},
                 emphasis: {
                     focus: 'series'
                 },
-                data: [120, 132, 101, 134, 90, 230, 210]
+                data: []
             },
             {
                 name: '联盟广告',
@@ -93,7 +86,7 @@ export default defineComponent({
                 emphasis: {
                     focus: 'series'
                 },
-                data: [220, 182, 191, 234, 290, 330, 310]
+                data: []
             },
             {
                 name: '视频广告',
@@ -103,7 +96,7 @@ export default defineComponent({
                 emphasis: {
                     focus: 'series'
                 },
-                data: [150, 232, 201, 154, 190, 330, 410]
+                data: []
             },
             {
                 name: '直接访问',
@@ -113,26 +106,40 @@ export default defineComponent({
                 emphasis: {
                     focus: 'series'
                 },
-                data: [320, 332, 301, 334, 390, 330, 320]
-            },
-            {
-                name: '搜索引擎',
-                type: 'line',
-                stack: '总量',
-                label: {
-                    show: true,
-                    position: 'top'
-                },
-                areaStyle: {},
-                emphasis: {
-                    focus: 'series'
-                },
-                data: [820, 932, 901, 934, 1290, 1330, 1320]
+                data: []
             }
         ]
-        });
+    });
 
-        return { option };
+    return { option};
+  } ,
+  mounted () {
+    //replace filler data with actual values
+    fetch(ROOT_PATH + '/api/avg-income-list/' + currentCountry)
+        .then(response => response.json())
+        .then(data => {
+        console.log(data);
+        let newYears = [];
+        let top1s = [];
+        let top10s = [];
+        let top40s = [];
+        let bottom50s = [];
+
+        for (var year in data) {
+            //if( year > 2005){
+            newYears.push(year);
+                //top1s.push(data[year].p99p100.percent);
+                top10s.push(data[year].p90p99.percent);
+                //top40s.push(data[year].p50p90.percent);
+                //bottom50s.push(data[year].p0p50.percent);
+            //}
+        }
+
+        this.option.xAxis[0].data = newYears;
+        this.option.series[0].data = top1s;
+        this.option.series[1].data = top10s;
+        this.option.series[2].data = top40s;
+        this.option.series[3].data = bottom50s;
     });
   }
 });
