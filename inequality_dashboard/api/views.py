@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from django.http import HttpResponse
+from django.http import HttpResponse, response, JsonResponse
 
 from .models import Country, IndicatorType, Indicator, IndicatorPercentile
 
@@ -78,6 +78,8 @@ def average_income_list(request, country_code, year = None):
 
         result[y] = avg_income_list
         # TODO create real serializer for this
+        response = HttpResponse(json.dumps(result))
+        response["Access-Control-Allow-Origin"] = "*" #TODO change to my server adress !
 
-    return HttpResponse(json.dumps(result))
+    return response
 
