@@ -1,15 +1,20 @@
 <template>
-  <IncomeLineChart />
+  <div>
+    <Header />
+    <IncomeLineChart />
+  </div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 //import TestChart from './components/TestChart.vue'
 import IncomeLineChart from './components/IncomeLineChart.vue'
+import Header from './components/Header.vue'
 // test from https://www.youtube.com/watch?v=CYPZBK8zUik
 export default {
   name: 'App',
   components: {
+    Header,
     IncomeLineChart
   }
 }

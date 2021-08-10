@@ -111,7 +111,7 @@ export default defineComponent({
         ]
     });
 
-    return { option};
+    return { option };
   } ,
   mounted () {
     //replace filler data with actual values
@@ -128,10 +128,10 @@ export default defineComponent({
         for (var year in data) {
             //if( year > 2005){
             newYears.push(year);
-                //top1s.push(data[year].p99p100.percent);
-                top10s.push(data[year].p90p99.percent);
+                top1s.push(data[year].p99p100.percent);
+                //top10s.push(data[year].p90p99.percent);
                 //top40s.push(data[year].p50p90.percent);
-                //bottom50s.push(data[year].p0p50.percent);
+                bottom50s.push(data[year].p0p50.percent);
             //}
         }
 
